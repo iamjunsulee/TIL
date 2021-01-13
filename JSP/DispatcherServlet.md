@@ -22,7 +22,7 @@
 모든 요청에 대해 하나의 서블릿이 다 받아서 다른 컨트롤러로 위임시켜준다. 
 
 ### DispatcherServlet이란
-Spring MVC에서는 Front Controller 역할을 하는 서블릿을 만들어놓았다. 그게 바로 __DispatcherServlet__이다.
+Spring MVC에서는 Front Controller 역할을 하는 서블릿을 만들어놓았다. 그게 바로 DispatcherServlet이다.
 간단하게 말하자면 모든 요청을 받아 실질적인 요청을 처리할 controller를 매핑하고 해당 요청 처리 결과를 Http Response 만드는 역할을 한다.
 //TO-DO DispatcherServlet에 대해 자세하게 정리할 필요가 있음. 
 
@@ -33,15 +33,15 @@ Spring MVC에서는 Front Controller 역할을 하는 서블릿을 만들어놓�
 ![mvc-hierarchy](/JSP/image/mvc-context-hierarchy.png)
 
 > The root `WebApplicationContext` typically contains infrastructure beans, such as data repositories and business services that need to be shared across multiple `Servlet` instances. Those beans are effectively inherited and can be overridden (that is, re-declared) in the Servlet-specific child `WebApplicationContext`, which typically contains beans local to the given `Servlet`.
-> 출처 : https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web
+출처 : https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web
 
 DispatcherServlet은 일반적으로 계층 구조를 가진다. (보통 단일 DispatcherServlet, 단일 WebApplicationContext를 갖는 구조로 간단하게도 만들기도 한다.)
 Root WebApplicationContext는 일반적으로 여러 개의 Servlet 인스턴스에서 공유해야 하는 데이터 저장소 및 비즈니스 서비스와 같은 인프라 bean을 포함한다.
 이러한 bean은 효과적으로 상속되며 서블릿 특정 클래스에서 재정의될 수 있다.
 Servlet WebApplicationContext는 일반적으로 주어진 지역의 빈을 포함한다.
 
-즉, ContextLoaderListener에 의해 ServletContext에 등록되는 ApplicationContext가 바로 __Root WebApplicationContext__이고,
-DIspatcheServlet에서 Root WebApplicationContext를 상속받아 만든 ApplicationContext가 __Servlet WebApplicationContext__인 것이다.
+즉, ContextLoaderListener에 의해 ServletContext에 등록되는 ApplicationContext가 바로 Root WebApplicationContext이고,
+DIspatcheServlet에서 Root WebApplicationContext를 상속받아 만든 ApplicationContext가 Servlet WebApplicationContext인 것이다.
 
 
 
