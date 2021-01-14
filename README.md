@@ -9,7 +9,7 @@
 - [Servlet](https://github.com/iamjunsulee/TIL/blob/master/JSP/Servlet.md)
 - [Servlet에서 IOC Container 사용하는 법](https://github.com/iamjunsulee/TIL/blob/master/JSP/Servlet-IOC%20Container.md)
 - [DispatcherServlet](https://github.com/iamjunsulee/TIL/blob/master/JSP/DispatcherServlet.md)
+- [DispatcherServlet 동작원리](https://github.com/iamjunsulee/TIL/blob/master/JSP/DispatcherServlet2.md)
 
 ### Git
-
 - [Git과 Svn](https://github.com/iamjunsulee/TIL/blob/master/Git/Git-Svn.md)
