@@ -11,12 +11,12 @@ public class EventController {
     }
 }
 ```
-즉, ViewResolver는 사용자가 요청한 것에 대핸 응답 View를 렌더링하는 역할을 수행한다.
+즉, ViewResolver는 사용자가 요청한 것에 대한 응답 View를 렌더링하는 역할을 수행한다.
 <br></br>
 ## 2. DispatcherServlet의 ViewResolver
 DispatchServlet에서 ViewResolver는 어떻게 생성될까?
 
-![init](/JSP/image/init-strategy.png)
+![init](/JSP/image/init-strategy.PNG)
 
 Servlet의 생명주기에 따르면 최초 1회 초기화될 때, init() 메소드가 실행된다.
 
@@ -52,11 +52,13 @@ public class WebConfig {
 <br></br>
 ## 4. SpringBoot 기반에서 설정방법
 SpringBoot 기반 어플리케이션에는 SpringApplication 메인 클래스에 보면 @SpringBootApplication 어노테이션이 있는데, 이 어노테이션을 자세히 보면 @SpringBootConfiguration , @EnableAutoConfiguration, @ComponentScan 3가지 어노테이션으로 구성되어있는 것을 알 수 있다.
-그 중 @EnableAutoConfiguration에 의해 spring.factories 안에 들어있는 수많은 자동 설정들이 조건에 따라 적용이 되어 수 많은 Bean들이 생성되고, 스프링 부트 어플리케이션이 실행되는 것이다.
+
+그 중 @EnableAutoConfiguration에 의해 spring.factories 안에 들어있는 수많은 자동 설정들이 조건에 따라 적용이 되어 수많은 Bean들이 생성되고, SpringBoot 어플리케이션이 실행되는 것이다.
 
 spring.factories 파일 안에 WebMvcAutoConfiguration class를 확인해보면 아래와 같이 ViewResolver 설정이 되어있다. 
 
 ![web-mvc-auto](/JSP/image/web-mvc-auto.PNG)
+
 SpringBoot에서는 view template으로 thymeleaf를 사용하는데, 만약 JSP를 사용하고자할 때, application.properties 파일에 preffix와 suffix를 설정하면 원하는 대로 사용할 수 있다.
 ```
 spring.mvc.view.prefix="/WEB-INF/"
