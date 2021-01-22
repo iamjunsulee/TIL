@@ -78,7 +78,7 @@ public class WebConfig {
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void configureViewResolvers(iewResolverRegistry registry) {
-        registry.jsp("/WEB-INF", ".jsp");
+        registry.jsp("/WEB-INF/", ".jsp");
     }
 }
 ```
