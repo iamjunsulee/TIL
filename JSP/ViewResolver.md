@@ -73,7 +73,7 @@ spring.mvc.view.suffix=".jsp"
 ```
 
 _**그렇다면 thymeleaf를 사용할 때, 따로 prefix와 suffix를 설정하지 않았는 데 어떻게 controller에서 View 이름만 넘겨도 되는 걸까?**_  
-thymeleaf 관련 설정도 WebMvc 설정과 마찬가지고 spring.factories 파일 안에 org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration 클래스에 설정되어 있다.
+thymeleaf 관련 설정도 WebMvc 설정과 마찬가지로 spring.factories 파일 안에 org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration 클래스에 설정되어 있다.
 ```java
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({ThymeleafProperties.class})
