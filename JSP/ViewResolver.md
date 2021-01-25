@@ -58,9 +58,37 @@ SpringBoot 기반 어플리케이션에는 SpringApplication 메인 클래스에
 spring.factories 파일 안에 WebMvcAutoConfiguration class를 확인해보면 아래와 같이 ViewResolver 설정이 되어있다. 
 
 ![web-mvc-auto](/JSP/image/web-mvc-auto.PNG)
-
-SpringBoot에서는 view template으로 thymeleaf를 사용하는데, 만약 JSP를 사용하고자할 때, application.properties 파일에 preffix와 suffix를 설정하면 원하는 대로 사용할 수 있다.
+```java
+@ConfigurationProperties(
+    prefix = "spring.mvc"
+)
+public class WebMvcProperties {
+}
+```
+mvcProperties라는 변수명으로 설정된 클래스를 따라가보면 prefix가 spring.mvc로 설정되어 있는 것을 확인할 수 있다. 즉, application.properties 파일에 spring.mvc prefix를 기반으로 설정을 읽어오게 된다.  
+따라서 만약 JSP를 사용하고자할 때, application.properties 파일에 아래와 같이 preffix와 suffix를 설정하면 원하는 대로 사용할 수 있다.
 ```
 spring.mvc.view.prefix="/WEB-INF/"
 spring.mvc.view.suffix=".jsp"
 ```
+
+_**그렇다면 thymeleaf를 사용할 때, 따로 prefix와 suffix를 설정하지 않았는 데 어떻게 controller에서 View 이름만 넘겨도 되는 걸까?**_  
+thymeleaf 관련 설정도 WebMvc 설정과 마찬가지고 spring.factories 파일 안에 org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration 클래스에 설정되어 있다.
+```java
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties({ThymeleafProperties.class})
+@ConditionalOnClass({TemplateMode.class, SpringTemplateEngine.class})
+@AutoConfigureAfter({WebMvcAutoConfiguration.class, WebFluxAutoConfiguration.class})
+public class ThymeleafAutoConfiguration { 
+}
+
+@ConfigurationProperties(
+        prefix = "spring.thymeleaf"
+)
+public class ThymeleafProperties {
+    private String prefix = "classpath:/templates/";
+    private String suffix = ".html";
+}
+```
+@EnableConfigurationProperties 어노테이션을 통해 ThymeleafProperties 클래스를 빈으로 등록하고 프로퍼티 값을 할당하고 있다.
+*ThymeleafProperties 클래스를 보면 위와 같이 prefix와 suffix 값이 초기 설정값이 있는 것을 확인할 수 있다.* 그래서 우리가 따로 설정하지 않아도 초기값에 해당하는 디렉토리 경로에 파일을 만들면 알아서 View를 읽을 수 있는 것이다.
