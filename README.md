@@ -3,6 +3,7 @@
 
 ### Spring
 - [MVC 패턴](https://github.com/iamjunsulee/TIL/blob/master/Spring/MVC.md)
+- [@EnableWebMvc](https://github.com/iamjunsulee/TIL/blob/master/Spring/EnableWebMvc.md)
 
 ### JSP
 - [Servlet Listener, Filter](https://github.com/iamjunsulee/TIL/blob/master/JSP/Listener-Filter.md)
