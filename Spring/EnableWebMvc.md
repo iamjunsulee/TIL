@@ -102,7 +102,7 @@ public class WebMvcAutoConfiguration {
 }
 ```
 여기서 봐야할 것은 _@ConditionalOnMissingBean({WebMvcConfigurationSupport.class})_ 이 부분이다.
-이 어노테이션이 의미하는 것은 WebMvcConfigurationSupport 타입의 빈이 없어야만 WebMvcAutoConfiguration 클래스의 설정파일을 사용한다는 뜻이다.  
+이 어노테이션이 의미는 "WebMvcConfigurationSupport 타입의 빈이 없어야만 WebMvcAutoConfiguration 클래스의 설정파일을 사용한다" 이다.  
 @EnableWebMvc 는 DelegatingWebMvcConfiguration 클래스를 import 하고 있고, 이 클래스는 WebMvcConfigurationSupport 클래스를 상속받았다고 했다.  
    
 **즉, @EnableWebMvc 를 사용하면 SpringBoot 자동 설정 파일을 사용하지 못하게 된다.**
