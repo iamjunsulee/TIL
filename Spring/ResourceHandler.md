@@ -50,6 +50,73 @@ public class WebConfig implements WebMvcConfigurer {
 }
 ```
 WebMvcConfigurer를 구현한 WebConfig 클래스에 configureDefaultServletHandling 메소드를 구현해준다.  
-설정하고나면 http://localhost:8080/resources/fcb.jpg 이렇게 정적 리소스에 접근할 경우 아무런 문제없이 처리가 된다.
+설정하고나면 http://localhost:8080/resources/fcb.jpg 이렇게 정적 리소스에 접근할 경우 아무런 문제없이 처리가 된다.  
 
+### SpringBoot 에서 정적 리소스 설정
 
+SpringBoot에서는 스프링 MVC 관련 설정들을 자동으로 해주는 데, 정적 리소스 관련 설정 또한 기본적으로 지원한다.  
+
+먼저 static 디렉토리 안에 sample.html을 생성하고 실행시켜보자. 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Static Resources Sample Page</h1>
+</body>
+</html>
+```
+
+![sample](/Spring/image/staticResourcesSample.PNG)  
+
+결과는 보시다시피 정상적으로 호출이 되는 것을 확인할 수 있다.  
+_왜 이렇게 될까?_  
+
+![addResourceHandler](/Spring/image/addResourceHandler.PNG)  
+
+autoconfig 설정에 보면 addResourceHandler 메소드가 있다. 이 메소드를 살펴보면 property 정보를 기반으로 정적 리소스를 처리하는 ResourceHandler를 추가하고 있음을 확인할 수 있다.
+
+![webMvcProperties](/Spring/image/webMvcProperties.PNG)  
+![staticLocation](/Spring/image/staticLocation.PNG)  
+
+기본 패턴은 "/**"으로 설정되어있고, 파일이 위치하는 경로는 "classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/" 이렇게 설정되어 있다.   
+따라서 http://localhost:8080/sample.html 을 요청하면 정적 리소스 위치에서 해당 파일을 찾아서 응답한다. 
+
+경로를 바꾸고 싶다거나 패턴을 바꾸고 싶은 경우, 커스터마이징 방법 또한 지원한다.
+
+1. application.properties 에 설정 추가하기  
+![directory](/Spring/image/directory.PNG)  
+   위와 같이 새로운 디렉토리 경로에 hello.html 파일을 만든 후, application.properties 파일에 아래 설정을 추가하였다.
+   ```text
+   spring.web.resources.static-locations=classpath:/sample/
+   ```
+   ![hello page](/Spring/image/helloPage.PNG)  
+정상적으로 호출되는 것을 확인할 수 있다.
+   
+
+2. WebMvcConfigurer 인터페이스 구현하기
+   ```java
+   @Configuration
+   //@EnableWebMvc
+   public class WebConfig implements WebMvcConfigurer {
+   @Override
+   public void addInterceptors(InterceptorRegistry registry) {
+   registry.addInterceptor(new MyInterceptor());
+   }
+   
+       @Override
+       public void addFormatters(FormatterRegistry registry) {
+           registry.addFormatter(new PersonFormatter());
+       }
+   
+       @Override
+       public void addResourceHandlers(ResourceHandlerRegistry registry) {
+           registry.addResourceHandler("/**")
+                   .addResourceLocations("classpath:/sample/");
+       }
+   }
+   ```
+addResourceHandler 메소드를 구현해주면 패턴과 정적 리소스 위치, 쿠키 설정 등을 커스터마이징 할 수 있다.
