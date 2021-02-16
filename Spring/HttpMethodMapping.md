@@ -18,5 +18,36 @@ Http(Hyper Text Transfer Protocol)는 클라이언트와 서버 사이에 이루
 5XX : 서버 측 오류
 - 500 : Internal Server Error(서버 내부 오류)
 
+### Http Method Mapping 하는 법
+1. 클래스 레벨에서 선언하는 방법
+```java
+@Controller
+@RequestMapping(value = "/hello", method = RequestMethod.GET)
+public class HelloController {
+}
+```
+위와 같이 컨트롤러 클래스 상단에 @RequestMapping 어노테이션을 사용해서 매핑할 수 있다. "/hello" 로 시작하는 요청을 처리하는 클래스가 된다.
 
-참고 : https://ko.wikipedia.org/wiki/HTTP#%EC%9A%94%EC%B2%AD_%EB%A9%94%EC%8B%9C%EC%A7%80
+2. 메소드 레벨에서 선언하는 방법
+```java
+@Controller
+@RequestMapping(value = "/hello", method = RequestMethod.GET)
+public class HelloController {
+    @RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.PUT})
+    @ResponseBody
+    public String getList() {
+        return "hello";
+    }
+}
+```
+위와 같이 메소드 레벨에서 선언하여 매핑할 수도 있다. method field 값에 RequestMethod enum을 활용하여 Http Method Type을 설정할 수 있고, 여러 개의 Http Method Type을 같이 설정해줄 수도 있다. 위 getList 메소드의 경우, "/hello/list" 로 들어오는 PUT, GET 요청을 처리한다.
+```text
+@RequestMapping(value = "/list", method = RequestMethod.GET)
+```
+위 어노테이션을 아래와 같이 간단하게 사용할 수 있다. Http Method에 따라 @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping을 사용하면 된다.
+```text
+@GetMapping("/list")
+```
+<br>
+
+참고 : <https://ko.wikipedia.org/wiki/HTTP#%EC%9A%94%EC%B2%AD_%EB%A9%94%EC%8B%9C%EC%A7%80>
