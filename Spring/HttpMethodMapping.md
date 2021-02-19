@@ -14,6 +14,7 @@ Http(Hyper Text Transfer Protocol)는 클라이언트와 서버 사이에 이루
 4XX : 클라이언트 측의 오류  
 - 404 : Not Found(문서를 찾을 수 없음)
 - 405 : Method Not Allowed(메서드 허용 안됨)
+- 415 : Unsupported Media Type
 
 5XX : 서버 측 오류
 - 500 : Internal Server Error(서버 내부 오류)
