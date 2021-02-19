@@ -103,7 +103,62 @@ public class HelloController {
     }
 }
 ```
-응답 미디어 타입의 경우, 따로 accept로 지정해주지 않아도 정상적으로 테스트가 통과되었다. 응답 미디어 타입을 지정하지 않았으니까 요청 처리할 때 지정해준 미디어 타입으로 그대로 반환이 되서 그런가보다.
+응답 미디어 타입의 경우, 따로 accept로 지정해주지 않아도 정상적으로 테스트가 통과되었다. 응답 미디어 타입을 지정하지 않았으니까 요청 처리할 때 지정해준 미디어 타입으로 그대로 반환이 되서 그런가보다.  
+
+※ 참고로 미디어 타입을 지정해줄 때, 문자값을 주는 것보단 MediaType 클래스에 이미 정의된 상수값을 사용하는 것이 오타도 방지하고 더 효율적이다. 
+### Http Header Parameter Mapping
+Http Request Header에 parameter 존재 여부에 따라 요청을 제한할 수 있다.
+아래 코드를 보자. headers 필드에 HttpHeaders 클래스에 정의된 상수 ALLOW를 설정했다. Http 요청 헤더에 ALLOW key에 해당 하는 값이 있는 요청인 경우에만 처리하겠다는 뜻이다.
+```java
+@Controller
+public class HelloController {
+    @RequestMapping(value = "/list"
+            , headers = HttpHeaders.ALLOW)
+    @ResponseBody
+    public String getHttpMethod() {
+        return "get";
+    }
+}
+```
+테스트 코드를 작성해보자. 
+```java
+@Test
+public void getHttpMethodTest() throws Exception{
+    this.mockMvc.perform(get("/list")
+    .header(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS,"hi"))
+    .andDo(print())
+    .andExpect(status().isOk())
+    .andExpect(content().string("get"))
+    .andExpect(handler().handlerType(EventController.class));
+}
+```
+![http request](/Spring/image/mockRequest.PNG)  
+Header 정보에 ACCESS_CONTROL_ALLOW_CREDENTIALS 키 값을 넘겨줬다. 테스트 결과는 어떨까? 실패한다.  
+요청을 처리하는 컨트롤러 메소드에 정의한 Header 키 값은 ALLOW 이기때문이다. 해당 키 값이 헤더에 존재하지 않기 때문에 실패한다. 
+```java
+@Test
+public void getHttpMethodTest() throws Exception{
+    this.mockMvc.perform(get("/list")
+    .header(HttpHeaders.ALLOW,"hi"))
+    .andDo(print())
+    .andExpect(status().isOk())
+    .andExpect(content().string("get"))
+    .andExpect(handler().handlerType(EventController.class));
+}
+```
+위와 같이 고치면 정상적으로 테스트가 통과된다. 
+혹은 아래와 같이 "!" 를 붙여주면 해당 키 값이 없는 경우, 해당 요청을 처리하게 된다.
+```java
+@Controller
+public class HelloController {
+    @RequestMapping(value = "/list"
+            , headers = "!" + HttpHeaders.ALLOW)
+    @ResponseBody
+    public String getHttpMethod() {
+        return "get";
+    }
+}
+```
 <br>
 
 참고 : <https://ko.wikipedia.org/wiki/HTTP#%EC%9A%94%EC%B2%AD_%EB%A9%94%EC%8B%9C%EC%A7%80>
