@@ -112,3 +112,6 @@ MockHttpServletResponse:
           Cookies = []
 ```
 결과는 이렇게 성공한다. 
+
+참고  
+<https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/annotation/AliasFor.html>
