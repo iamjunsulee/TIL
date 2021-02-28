@@ -134,3 +134,8 @@ MockHttpServletResponse:
           Cookies = []
 ```
 결과는 요청 파라미터를 보내지 않았음에도 위와 같이 정상적으로 통과된다.
+
+<br>
+
+참고
+<https://www.baeldung.com/spring-request-param>
