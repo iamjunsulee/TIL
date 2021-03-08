@@ -11,6 +11,7 @@
 - [HttpMessageConverter](https://github.com/iamjunsulee/TIL/blob/master/Spring/HttpMessageConverter.md)
 - [Http Method Mapping](https://github.com/iamjunsulee/TIL/blob/master/Spring/HttpMethodMapping.md)
 - [@RequestParam](https://github.com/iamjunsulee/TIL/blob/master/Spring/RequestParam.md)
+- [MapStruct 사용하기](https://github.com/iamjunsulee/TIL/blob/master/Spring/MapStruct.md)
 ### JSP
 - [Servlet Listener, Filter](https://github.com/iamjunsulee/TIL/blob/master/JSP/Listener-Filter.md)
 - [Servlet](https://github.com/iamjunsulee/TIL/blob/master/JSP/Servlet.md)
