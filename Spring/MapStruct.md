@@ -45,12 +45,18 @@ DTO 객체는 View Layer와 데이터를 주고 받을 때 사용하고, Entity 
 ```java
 @Entity
 @Getter
-@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id @GeneratedValue
     private Long id;
     private String name;
     private String userId;
+
+    @Builder
+    public Member(String name, String userId) {
+        this.name = name;
+        this.userId = userId;
+    }
 }
 ```
 ```java
@@ -75,9 +81,8 @@ public interface MemberMapper {
     MemberDto toDto(Member entity);
 }
 ```
-위와 같이 필드 명이 다를 경우, @Mapping 어노테이션을 사용해서 지정해줄 수 있다. 근데, Entity 클래스 작성시, @Setter가 아니라 @Builder 어노테이션을 사용했을 경우, 계속 에러가 났다. Bug 같긴 한데, 좀 더 구글링해봐야겠다.  
-
-Maven Build를 해보면 @Mapper 어노테이션이 붙어있는 인터페이스를 구현한 구현체가 생성됨을 확인할 수 있었다. 생성된 코드는 아래와 같다. getter 와 setter 를 통해 변환하고 있음을 알 수 있다.
+위와 같이 필드 명이 다를 경우, @Mapping 어노테이션을 사용해서 지정해줄 수 있다.  
+Maven Build를 해보면 @Mapper 어노테이션이 붙어있는 인터페이스를 구현한 구현체가 생성됨을 확인할 수 있었다. 생성된 코드는 아래와 같다. getter 와 Builder pattern 을 통해 변환하고 있음을 알 수 있다.
 ```java
 @Component
 public class MemberMapperImpl implements MemberMapper {
@@ -88,10 +93,11 @@ public class MemberMapperImpl implements MemberMapper {
         if (dto == null) {
             return null;
         } else {
-            Member member = new Member();
-            member.setUserId(dto.getUser());
-            member.setId(dto.getId());
-            member.setName(dto.getName());
+            String userId = null;
+            String name = null;
+            userId = dto.getUser();
+            name = dto.getName();
+            Member member = new Member(name, userId);
             return member;
         }
     }
@@ -110,7 +116,7 @@ public class MemberMapperImpl implements MemberMapper {
 }
 ``` 
 
-### 저장과 조회 시 사용하는 방법
+### 저장과 조회 메소드 작성
 ```java
 @Service
 @RequiredArgsConstructor
