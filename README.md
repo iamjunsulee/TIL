@@ -14,6 +14,10 @@
 - [MapStruct 사용하기](https://github.com/iamjunsulee/TIL/blob/master/Spring/MapStruct.md)
 - [데이터 유효성 검사하기](https://github.com/iamjunsulee/TIL/blob/master/Spring/Validation.md)
 - [초기 데이터 넣기](https://github.com/iamjunsulee/TIL/blob/master/Spring/InitialDataInput.md)
+
+### JAVA
+- [정적 팩토리 메소드](https://github.com/iamjunsulee/TIL/blob/master/Java/StaticFactoryMethod.md)
+
 ### JSP
 - [Servlet Listener, Filter](https://github.com/iamjunsulee/TIL/blob/master/JSP/Listener-Filter.md)
 - [Servlet](https://github.com/iamjunsulee/TIL/blob/master/JSP/Servlet.md)
