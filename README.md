@@ -19,6 +19,7 @@
 - [정적 팩토리 메소드](https://github.com/iamjunsulee/TIL/blob/master/Java/StaticFactoryMethod.md)
 - [빌더 패턴](https://github.com/iamjunsulee/TIL/blob/master/Java/BuilderPattern.md)
 - [싱글턴](https://github.com/iamjunsulee/TIL/blob/master/Java/Singleton.md)
+- [private 생성자](https://github.com/iamjunsulee/TIL/blob/master/Java/PrivateConstructor.md)
 
 ### JSP
 - [Servlet Listener, Filter](https://github.com/iamjunsulee/TIL/blob/master/JSP/Listener-Filter.md)
