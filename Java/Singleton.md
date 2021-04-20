@@ -16,3 +16,11 @@ public class Singleton {
     }
 }
 ```
+정적 메소드 대신에 static final 멤버 변수를 public 으로 지정하여 사용하는 방법도 있다.
+```java
+public class Singleton {
+    public static final Singleton instance = new Singleton();
+    private Singleton() { }
+}
+```
+정적 메소드를 생성할 필요가 없으며, 직관적이다. private 생성자로 인해 외부에서 인스턴스를 생성할 수 없고, static final 멤버 변수를 사용함으로써 최초 초기화 이후 다시 초기화할 수 없으며 메모리 영역에서 공유하는 유일한 객체를 만들 수 있다.
