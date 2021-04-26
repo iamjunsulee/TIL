@@ -29,7 +29,7 @@ public class Parent {
 }
 ```
 선언과 동시에 초기화하지 않는 경우, 인수로 받는 생성자를 생성해야만 한다.  
-객체 타입의 변수에 final 키워드를 적용시켜보자.
+참조(reference) 타입의 변수에 final 키워드를 적용시켜보자.
 ```java
 public class Parent {
     private final int age = 1;
@@ -74,3 +74,9 @@ public final class Parent {
 class Child extends Parent {    //compile error
 }
 ```
+
+정리하자면 final 키워드는 변수나 메서드 또는 클래스가 **변경 불가능**하도록 만든다.  
+- 원시 타입의 변수에 적용 시, 해당 변수의 값은 바꿀 수 없다. 
+- 참조 변수에 적용 시, Heap 영역 내 다른 객체를 가리키도록 변경할 수 없다.
+- 메서드에 적용 시, 오버라이딩 할 수 없다.
+- 클래스에 적용 시, 해당 클래스를 상속받을 수 없다.  
