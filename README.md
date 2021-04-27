@@ -23,6 +23,7 @@
 - [싱글턴](https://github.com/iamjunsulee/TIL/blob/master/Java/Singleton.md)
 - [private 생성자](https://github.com/iamjunsulee/TIL/blob/master/Java/PrivateConstructor.md)
 - [final 키워드](https://github.com/iamjunsulee/TIL/blob/master/Java/FinalKeyword.md)
+- [의존 객체 주입](https://github.com/iamjunsulee/TIL/blob/master/Java/DependencyInjection.md)
 
 ### JSP
 - [Servlet Listener, Filter](https://github.com/iamjunsulee/TIL/blob/master/JSP/Listener-Filter.md)
